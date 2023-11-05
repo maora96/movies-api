@@ -1,22 +1,19 @@
 import { Module, ValidationPipe } from '@nestjs/common';
-// import { UsersModule } from './users/users.module';
-// import { TasksModule } from './tasks/tasks.module';
 import { APP_PIPE } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-// import { User } from './users/user.entity';
-// import { Task } from './tasks/task.entity';
+import { User } from './users/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    // UsersModule,
-    // TasksModule,
+    UsersModule,
     AuthModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      // entities: [User, Task],
+      entities: [User],
       synchronize: true,
       username: process.env.PGUSER,
       password: process.env.PGPASSWORD,
@@ -25,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
       port: Number(process.env.PGPORT),
     }),
     AuthModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [
