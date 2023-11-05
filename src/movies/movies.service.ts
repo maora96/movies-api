@@ -16,8 +16,6 @@ export class MoviesService {
 
     const movie = new Movie(title, blurb, releasedAt, subtitle);
 
-    console.log('hey', movie);
-
     return this.moviesRepository.save(movie);
   }
 
