@@ -5,15 +5,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { MoviesModule } from './movies/movies.module';
+import { Movie } from './movies/movie.entity';
 
 @Module({
   imports: [
     UsersModule,
     AuthModule,
+    MoviesModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      entities: [User],
+      entities: [User, Movie],
       synchronize: true,
       username: process.env.PGUSER,
       password: process.env.PGPASSWORD,
